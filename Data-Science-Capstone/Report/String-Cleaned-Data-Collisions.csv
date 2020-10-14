@@ -1,0 +1,11 @@
+,SEVERITYCODE,ADDRTYPE,COLLISIONTYPE,PERSONCOUNT,PEDCOUNT,PEDCYLCOUNT,VEHCOUNT,JUNCTIONTYPE,INATTENTIONIND,UNDERINFL,WEATHER,ROADCOND,LIGHTCOND,PEDROWNOTGRNT,SPEEDING,ST_COLDESC,CROSSWALKKEY,HITPARKEDCAR,HOUROFDAY
+0,2,Intersection,Angles,2,0,0,2,At Intersection (intersection related),0,0,Overcast,Wet,Daylight,0,0,Entering at angle,0,0,14
+1,1,Block,Sideswipe,2,0,0,2,Mid-Block (not related to intersection),0,0,Raining,Wet,Dark - Street Lights On,0,0,From same direction - both going straight - both moving - sideswipe,0,0,18
+2,1,Block,Parked Car,4,0,0,3,Mid-Block (not related to intersection),0,0,Overcast,Dry,Daylight,0,0,One parked--one moving,0,0,10
+3,1,Block,Other,3,0,0,3,Mid-Block (not related to intersection),0,0,Clear,Dry,Daylight,0,0,From same direction - all others,0,0,9
+4,2,Intersection,Angles,2,0,0,2,At Intersection (intersection related),0,0,Raining,Wet,Daylight,0,0,Entering at angle,0,0,8
+5,1,Intersection,Angles,2,0,0,2,At Intersection (intersection related),0,0,Clear,Dry,Daylight,0,0,Entering at angle,0,0,17
+6,1,Intersection,Angles,2,0,0,2,At Intersection (intersection related),0,0,Raining,Wet,Daylight,0,0,Entering at angle,0,0,0
+7,2,Intersection,Cycles,3,0,1,1,At Intersection (intersection related),0,0,Clear,Dry,Daylight,0,0,Vehicle Strikes Pedalcyclist,0,0,17
+8,1,Block,Parked Car,2,0,0,2,Mid-Block (not related to intersection),0,0,Clear,Dry,Daylight,0,0,One parked--one moving,0,0,13
+9,2,Intersection,Angles,2,0,0,2,At Intersection (intersection related),0,0,Clear,Dry,Daylight,0,0,Entering at angle,0,0,15
