@@ -53,44 +53,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "First, we want to explore the data a little bit. We want to understand how much volume we have, and if there is any other useful information that we can recognize. This involves describing the data, looking at it's info, and seeing it's shape."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 27,
-   "metadata": {},
-   "outputs": [
-    {
-     "output_type": "stream",
-     "name": "stdout",
-     "text": [
-      "<class 'pandas.core.frame.DataFrame'>\nInt64Index: 189035 entries, 0 to 194672\nData columns (total 37 columns):\nSEVERITYCODE      189035 non-null int64\nX                 185653 non-null float64\nY                 185653 non-null float64\nOBJECTID          189035 non-null int64\nINCKEY            189035 non-null int64\nCOLDETKEY         189035 non-null int64\nREPORTNO          189035 non-null object\nSTATUS            189035 non-null object\nADDRTYPE          189032 non-null object\nINTKEY            64395 non-null float64\nLOCATION          188285 non-null object\nSEVERITYCODE.1    189035 non-null int64\nSEVERITYDESC      189035 non-null object\nCOLLISIONTYPE     184904 non-null object\nPERSONCOUNT       189035 non-null int64\nPEDCOUNT          189035 non-null int64\nPEDCYLCOUNT       189035 non-null int64\nVEHCOUNT          189035 non-null int64\nINCDATE           189035 non-null object\nINCDTTM           189035 non-null object\nJUNCTIONTYPE      185573 non-null object\nSDOT_COLCODE      189035 non-null int64\nSDOT_COLDESC      189035 non-null object\nINATTENTIONIND    189035 non-null int32\nUNDERINFL         189035 non-null int32\nWEATHER           184737 non-null object\nROADCOND          184805 non-null object\nLIGHTCOND         184667 non-null object\nPEDROWNOTGRNT     189035 non-null int32\nSDOTCOLNUM        113976 non-null float64\nSPEEDING          189035 non-null int32\nST_COLCODE        189018 non-null object\nST_COLDESC        184904 non-null object\nSEGLANEKEY        189035 non-null int64\nCROSSWALKKEY      189035 non-null int64\nHITPARKEDCAR      189035 non-null int32\nHOUROFDAY         189035 non-null int64\ndtypes: float64(4), int32(5), int64(13), object(15)\nmemory usage: 51.2+ MB\n"
-     ]
-    }
-   ],
-   "source": [
-    "collision_data.info()"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "We can see that there are a lot of objects in here. While for some algorithms that is acceptable, in the case of a decision tree, we must have integers or floats. We will need to assign numeric values in there place, and then replace the strings. "
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 5,
    "metadata": {},
@@ -170,106 +132,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "The raw data has 38 columns, 1 of which is the output data, and 1 of which is for indexing. This is fine, but we need to adjust the dataset to include variables that we will use for the analysis. Now let's take a look at the raw data."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 29,
-   "metadata": {},
-   "outputs": [
-    {
-     "output_type": "execute_result",
-     "data": {
-      "text/plain": [
-       "        SEVERITYCODE           X          Y  OBJECTID  INCKEY  COLDETKEY  \\\n",
-       "0                  2 -122.323148  47.703140         1    1307       1307   \n",
-       "1                  1 -122.347294  47.647172         2   52200      52200   \n",
-       "2                  1 -122.334540  47.607871         3   26700      26700   \n",
-       "3                  1 -122.334803  47.604803         4    1144       1144   \n",
-       "4                  2 -122.306426  47.545739         5   17700      17700   \n",
-       "...              ...         ...        ...       ...     ...        ...   \n",
-       "194668             2 -122.290826  47.565408    219543  309534     310814   \n",
-       "194669             1 -122.344526  47.690924    219544  309085     310365   \n",
-       "194670             2 -122.306689  47.683047    219545  311280     312640   \n",
-       "194671             2 -122.355317  47.678734    219546  309514     310794   \n",
-       "194672             1 -122.289360  47.611017    219547  308220     309500   \n",
-       "\n",
-       "       REPORTNO   STATUS      ADDRTYPE   INTKEY  ...                LIGHTCOND  \\\n",
-       "0       3502005  Matched  Intersection  37475.0  ...                 Daylight   \n",
-       "1       2607959  Matched         Block      NaN  ...  Dark - Street Lights On   \n",
-       "2       1482393  Matched         Block      NaN  ...                 Daylight   \n",
-       "3       3503937  Matched         Block      NaN  ...                 Daylight   \n",
-       "4       1807429  Matched  Intersection  34387.0  ...                 Daylight   \n",
-       "...         ...      ...           ...      ...  ...                      ...   \n",
-       "194668  E871089  Matched         Block      NaN  ...                 Daylight   \n",
-       "194669  E876731  Matched         Block      NaN  ...                 Daylight   \n",
-       "194670  3809984  Matched  Intersection  24760.0  ...                 Daylight   \n",
-       "194671  3810083  Matched  Intersection  24349.0  ...                     Dusk   \n",
-       "194672  E868008  Matched         Block      NaN  ...                 Daylight   \n",
-       "\n",
-       "        PEDROWNOTGRNT SDOTCOLNUM SPEEDING  ST_COLCODE  \\\n",
-       "0                   0        NaN        0          10   \n",
-       "1                   0  6354039.0        0          11   \n",
-       "2                   0  4323031.0        0          32   \n",
-       "3                   0        NaN        0          23   \n",
-       "4                   0  4028032.0        0          10   \n",
-       "...               ...        ...      ...         ...   \n",
-       "194668              0        NaN        0          24   \n",
-       "194669              0        NaN        0          13   \n",
-       "194670              0        NaN        0          28   \n",
-       "194671              0        NaN        0           5   \n",
-       "194672              0        NaN        0          14   \n",
-       "\n",
-       "                                               ST_COLDESC  SEGLANEKEY  \\\n",
-       "0                                       Entering at angle           0   \n",
-       "1       From same direction - both going straight - bo...           0   \n",
-       "2                                  One parked--one moving           0   \n",
-       "3                        From same direction - all others           0   \n",
-       "4                                       Entering at angle           0   \n",
-       "...                                                   ...         ...   \n",
-       "194668    From opposite direction - both moving - head-on           0   \n",
-       "194669  From same direction - both going straight - bo...           0   \n",
-       "194670  From opposite direction - one left turn - one ...           0   \n",
-       "194671                       Vehicle Strikes Pedalcyclist        4308   \n",
-       "194672  From same direction - both going straight - on...           0   \n",
-       "\n",
-       "        CROSSWALKKEY HITPARKEDCAR HOUROFDAY  \n",
-       "0                  0            0        14  \n",
-       "1                  0            0        18  \n",
-       "2                  0            0        10  \n",
-       "3                  0            0         9  \n",
-       "4                  0            0         8  \n",
-       "...              ...          ...       ...  \n",
-       "194668             0            0         8  \n",
-       "194669             0            0         9  \n",
-       "194670             0            0         9  \n",
-       "194671             0            0        16  \n",
-       "194672             0            0        15  \n",
-       "\n",
-       "[189035 rows x 37 columns]"
-      ],
-      "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>SEVERITYCODE</th>\n      <th>X</th>\n      <th>Y</th>\n      <th>OBJECTID</th>\n      <th>INCKEY</th>\n      <th>COLDETKEY</th>\n      <th>REPORTNO</th>\n      <th>STATUS</th>\n      <th>ADDRTYPE</th>\n      <th>INTKEY</th>\n      <th>...</th>\n      <th>LIGHTCOND</th>\n      <th>PEDROWNOTGRNT</th>\n      <th>SDOTCOLNUM</th>\n      <th>SPEEDING</th>\n      <th>ST_COLCODE</th>\n      <th>ST_COLDESC</th>\n      <th>SEGLANEKEY</th>\n      <th>CROSSWALKKEY</th>\n      <th>HITPARKEDCAR</th>\n      <th>HOUROFDAY</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>0</td>\n      <td>2</td>\n      <td>-122.323148</td>\n      <td>47.703140</td>\n      <td>1</td>\n      <td>1307</td>\n      <td>1307</td>\n      <td>3502005</td>\n      <td>Matched</td>\n      <td>Intersection</td>\n      <td>37475.0</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>10</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>14</td>\n    </tr>\n    <tr>\n      <td>1</td>\n      <td>1</td>\n      <td>-122.347294</td>\n      <td>47.647172</td>\n      <td>2</td>\n      <td>52200</td>\n      <td>52200</td>\n      <td>2607959</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Dark - Street Lights On</td>\n      <td>0</td>\n      <td>6354039.0</td>\n      <td>0</td>\n      <td>11</td>\n      <td>From same direction - both going straight - bo...</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>18</td>\n    </tr>\n    <tr>\n      <td>2</td>\n      <td>1</td>\n      <td>-122.334540</td>\n      <td>47.607871</td>\n      <td>3</td>\n      <td>26700</td>\n      <td>26700</td>\n      <td>1482393</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>4323031.0</td>\n      <td>0</td>\n      <td>32</td>\n      <td>One parked--one moving</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>10</td>\n    </tr>\n    <tr>\n      <td>3</td>\n      <td>1</td>\n      <td>-122.334803</td>\n      <td>47.604803</td>\n      <td>4</td>\n      <td>1144</td>\n      <td>1144</td>\n      <td>3503937</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>23</td>\n      <td>From same direction - all others</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>9</td>\n    </tr>\n    <tr>\n      <td>4</td>\n      <td>2</td>\n      <td>-122.306426</td>\n      <td>47.545739</td>\n      <td>5</td>\n      <td>17700</td>\n      <td>17700</td>\n      <td>1807429</td>\n      <td>Matched</td>\n      <td>Intersection</td>\n      <td>34387.0</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>4028032.0</td>\n      <td>0</td>\n      <td>10</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>8</td>\n    </tr>\n    <tr>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n      <td>...</td>\n    </tr>\n    <tr>\n      <td>194668</td>\n      <td>2</td>\n      <td>-122.290826</td>\n      <td>47.565408</td>\n      <td>219543</td>\n      <td>309534</td>\n      <td>310814</td>\n      <td>E871089</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>24</td>\n      <td>From opposite direction - both moving - head-on</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>8</td>\n    </tr>\n    <tr>\n      <td>194669</td>\n      <td>1</td>\n      <td>-122.344526</td>\n      <td>47.690924</td>\n      <td>219544</td>\n      <td>309085</td>\n      <td>310365</td>\n      <td>E876731</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>13</td>\n      <td>From same direction - both going straight - bo...</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>9</td>\n    </tr>\n    <tr>\n      <td>194670</td>\n      <td>2</td>\n      <td>-122.306689</td>\n      <td>47.683047</td>\n      <td>219545</td>\n      <td>311280</td>\n      <td>312640</td>\n      <td>3809984</td>\n      <td>Matched</td>\n      <td>Intersection</td>\n      <td>24760.0</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>28</td>\n      <td>From opposite direction - one left turn - one ...</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>9</td>\n    </tr>\n    <tr>\n      <td>194671</td>\n      <td>2</td>\n      <td>-122.355317</td>\n      <td>47.678734</td>\n      <td>219546</td>\n      <td>309514</td>\n      <td>310794</td>\n      <td>3810083</td>\n      <td>Matched</td>\n      <td>Intersection</td>\n      <td>24349.0</td>\n      <td>...</td>\n      <td>Dusk</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>5</td>\n      <td>Vehicle Strikes Pedalcyclist</td>\n      <td>4308</td>\n      <td>0</td>\n      <td>0</td>\n      <td>16</td>\n    </tr>\n    <tr>\n      <td>194672</td>\n      <td>1</td>\n      <td>-122.289360</td>\n      <td>47.611017</td>\n      <td>219547</td>\n      <td>308220</td>\n      <td>309500</td>\n      <td>E868008</td>\n      <td>Matched</td>\n      <td>Block</td>\n      <td>NaN</td>\n      <td>...</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>NaN</td>\n      <td>0</td>\n      <td>14</td>\n      <td>From same direction - both going straight - on...</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n      <td>15</td>\n    </tr>\n  </tbody>\n</table>\n<p>189035 rows × 37 columns</p>\n</div>"
-     },
-     "metadata": {},
-     "execution_count": 29
-    }
-   ],
-   "source": [
-    "collision_data"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Upon closer analysis, we notice that there are two columns that tell us explicitly if there is information missing or not. Those columns are useful, since we can drop any row that would not have enough information (NEI), so we filter out any row with that value in the column. From there, we no longer have a use for those columns, so we drop them."
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 7,
    "metadata": {},
@@ -277,13 +139,6 @@
    "source": [
     "collision_data.drop(collision_data[collision_data.EXCEPTRSNCODE == 'NEI'].index, inplace=True)\n",
     "collision_data.drop(columns=['EXCEPTRSNCODE', 'EXCEPTRSNDESC'], inplace=True)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Now we briefly want to see how the severitycode and the description of the code itself match up."
    ]
   },
   {
@@ -321,15 +176,8 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Now that we have that in our back pocket, we can begin to make some adjustments to other columns. We looked at the raw data, and were able to infer what values exist, and what they mean. From there, we were able to target what outputs we wanted to see, as a 1 or a 0. This information is commented out in the code below. "
-   ]
-  },
-  {
    "cell_type": "code",
-   "execution_count": 30,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -346,13 +194,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Next, we want to capture the hour of the day of the incident. While the datetime as an object is not helpful by itself, extracting the hour is valuable, since the time of the day might influence the severity. An accident at 1AM might be largely impactful."
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 10,
    "metadata": {},
@@ -364,15 +205,8 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "We're almost ready to feed the data to the machine learning system and build our tree. Next we can drop every column that has little to no impact on the severity of an incident. At this point, we also drop any rows that are missing data, since there are no continuous variables that will allow us to accurately estimate the value of the missing data. "
-   ]
-  },
-  {
    "cell_type": "code",
-   "execution_count": 31,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [
     {
@@ -442,7 +276,7 @@
       "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>SEVERITYCODE</th>\n      <th>ADDRTYPE</th>\n      <th>COLLISIONTYPE</th>\n      <th>PERSONCOUNT</th>\n      <th>PEDCOUNT</th>\n      <th>PEDCYLCOUNT</th>\n      <th>VEHCOUNT</th>\n      <th>JUNCTIONTYPE</th>\n      <th>INATTENTIONIND</th>\n      <th>UNDERINFL</th>\n      <th>WEATHER</th>\n      <th>ROADCOND</th>\n      <th>LIGHTCOND</th>\n      <th>PEDROWNOTGRNT</th>\n      <th>SPEEDING</th>\n      <th>ST_COLDESC</th>\n      <th>CROSSWALKKEY</th>\n      <th>HITPARKEDCAR</th>\n      <th>HOUROFDAY</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>0</td>\n      <td>2</td>\n      <td>Intersection</td>\n      <td>Angles</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Overcast</td>\n      <td>Wet</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>14</td>\n    </tr>\n    <tr>\n      <td>1</td>\n      <td>1</td>\n      <td>Block</td>\n      <td>Sideswipe</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>Mid-Block (not related to intersection)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Raining</td>\n      <td>Wet</td>\n      <td>Dark - Street Lights On</td>\n      <td>0</td>\n      <td>0</td>\n      <td>From same direction - both going straight - bo...</td>\n      <td>0</td>\n      <td>0</td>\n      <td>18</td>\n    </tr>\n    <tr>\n      <td>2</td>\n      <td>1</td>\n      <td>Block</td>\n      <td>Parked Car</td>\n      <td>4</td>\n      <td>0</td>\n      <td>0</td>\n      <td>3</td>\n      <td>Mid-Block (not related to intersection)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Overcast</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>One parked--one moving</td>\n      <td>0</td>\n      <td>0</td>\n      <td>10</td>\n    </tr>\n    <tr>\n      <td>3</td>\n      <td>1</td>\n      <td>Block</td>\n      <td>Other</td>\n      <td>3</td>\n      <td>0</td>\n      <td>0</td>\n      <td>3</td>\n      <td>Mid-Block (not related to intersection)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Clear</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>From same direction - all others</td>\n      <td>0</td>\n      <td>0</td>\n      <td>9</td>\n    </tr>\n    <tr>\n      <td>4</td>\n      <td>2</td>\n      <td>Intersection</td>\n      <td>Angles</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Raining</td>\n      <td>Wet</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>8</td>\n    </tr>\n    <tr>\n      <td>5</td>\n      <td>1</td>\n      <td>Intersection</td>\n      <td>Angles</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Clear</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>17</td>\n    </tr>\n    <tr>\n      <td>6</td>\n      <td>1</td>\n      <td>Intersection</td>\n      <td>Angles</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Raining</td>\n      <td>Wet</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>0</td>\n    </tr>\n    <tr>\n      <td>7</td>\n      <td>2</td>\n      <td>Intersection</td>\n      <td>Cycles</td>\n      <td>3</td>\n      <td>0</td>\n      <td>1</td>\n      <td>1</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Clear</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Vehicle Strikes Pedalcyclist</td>\n      <td>0</td>\n      <td>0</td>\n      <td>17</td>\n    </tr>\n    <tr>\n      <td>8</td>\n      <td>1</td>\n      <td>Block</td>\n      <td>Parked Car</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>Mid-Block (not related to intersection)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Clear</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>One parked--one moving</td>\n      <td>0</td>\n      <td>0</td>\n      <td>13</td>\n    </tr>\n    <tr>\n      <td>9</td>\n      <td>2</td>\n      <td>Intersection</td>\n      <td>Angles</td>\n      <td>2</td>\n      <td>0</td>\n      <td>0</td>\n      <td>2</td>\n      <td>At Intersection (intersection related)</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Clear</td>\n      <td>Dry</td>\n      <td>Daylight</td>\n      <td>0</td>\n      <td>0</td>\n      <td>Entering at angle</td>\n      <td>0</td>\n      <td>0</td>\n      <td>15</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
      },
      "metadata": {},
-     "execution_count": 31
+     "execution_count": 11
     }
    ],
    "source": [
@@ -457,13 +291,6 @@
    "outputs": [],
    "source": [
     "collision_data_relevant.head(10).to_csv('String-Cleaned-Data-Collisions.csv')"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Now, for the last step. we need to take all of the categorical variables and convert them from string form into numerical form. This involves creating a dictionary for all of the unique categorical variables in the column, and using this dictionary to map the numbers to the strings. Then, we replace each value in the column with the corresponding number. We do this for every column that we need to."
    ]
   },
   {
@@ -496,13 +323,6 @@
     "    # df = pd.DataFrame.from_dict(replace_map_comp)\n",
     "    # df.to_csv('{0}.csv'.format(i))\n",
     "    print(replace_map_comp)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "We reset the index, and take a look at our dataframe. Note that all of the values are numbers."
    ]
   },
   {
@@ -577,13 +397,6 @@
    "source": [
     "collision_data_relevant.reset_index(inplace=True, drop=True)\n",
     "collision_data_relevant"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "The correlation matrix can certainly be deceiving for some of the variables, but there are a few that are meaningful, such as PEDCOUNT."
    ]
   },
   {
@@ -690,13 +503,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "We save the information into csv files to allow us to import the data for further analysis in a separate file."
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 16,
    "metadata": {},
@@ -748,13 +554,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "All in one go, we breakout the dependent variable against the independent variables. We then split the variables into a 25%/75% split, with the 25% corresponding to the test variables that we want to save, and the 75% with the training variables. "
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 19,
    "metadata": {},
@@ -764,13 +563,6 @@
     "y = raw_collision_data['SEVERITYCODE']\n",
     "x = raw_collision_data.drop(columns=['SEVERITYCODE']).values\n",
     "x_trainset, x_testset, y_trainset, y_testset = train_test_split(x, y, test_size=0.25, random_state=3)"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Next, we need to determine what is the best depth for us to use for the tree. We test from 1->20 levels of depth, and check the accuracy (R^2) value of the model. The model that performs the best on all tests is the one with 12 levels. Manually checking different test sizes and different ranges confirmed this."
    ]
   },
   {
@@ -827,13 +619,6 @@
    ]
   },
   {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "We grab the necessary scores to determine if the model is adequate."
-   ]
-  },
-  {
    "cell_type": "code",
    "execution_count": 21,
    "metadata": {},
@@ -850,13 +635,6 @@
     "jaccard = jaccard_similarity_score(y_testset, prediction)\n",
     "f1_score = f1_score(y_testset, prediction, average='weighted')\n",
     "accuracies = ['Score:' ,best_accuracy, jaccard, f1_score]"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "Finally, we print the dataframe for our further use."
    ]
   },
   {
@@ -953,13 +731,6 @@
    ],
    "source": [
     "raw_collision_data.describe()"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "From this point forward, we simply are creating the graphs that will be used."
    ]
   },
   {
